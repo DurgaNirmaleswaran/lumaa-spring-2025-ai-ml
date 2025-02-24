@@ -1,91 +1,91 @@
 # AI/Machine Learning Intern Challenge: Simple Content-Based Recommendation
 
-**Deadline**: Sunday, Feb 23th 11:59 pm PST
-
 ---
 
 ## Overview
 
-Build a **content-based recommendation system** that, given a **short text description** of a user’s preferences, suggests **similar items** (e.g., movies) from a small dataset. This challenge should take about **3 hours**, so keep your solution **simple** yet **functional**.
+- This project is a simple yet functional content-based recommendation system designed for an AI/ML internship challenge. The system allows users to input a short text description of their preferences—for example, "I love thrilling action movies set in space, with a comedic twist" and returns a ranked list of similar items from a curated movie dataset. 
 
-### Example Use Case
+- The dataset includes various fields such as budget, genres, keywords, original title, overview, and production companies. Using a straightforward approach based on TF-IDF vectorization and cosine similarity, the system converts both the user query and each movie's textual information into numerical vectors. 
 
-- The user inputs:  
-  *"I love thrilling action movies set in space, with a comedic twist."*  
-- Your system processes this description (query) and compares it to a dataset of items (e.g., movies with their plot summaries or keywords).  
-- You then return the **top 3–5 “closest” matches** to the user.
+- It then computes the similarity between the query and every movie in the dataset, returning the top recommendations based on the highest similarity scores. The project is implemented in Python and organized into clear, modular sections for data loading, preprocessing, vectorization, similarity computation, and result presentation. 
 
----
+- This prototype is meant to be lightweight, efficient, and easy to understand, perfect for demonstrating core machine learning and recommendation concepts within a limited timeframe. Additionally, the project includes a README with setup instructions, a brief video demo of the system in action, and details on the expected monthly salary as part of the challenge submission requirements.
+
+
+## Dataset
+- **Source**: The dataset used is based on movie metadata and includes fields such as:
+  - `budget`
+  - `genres`
+  - `homepage`
+  - `id`
+  - `keywords`
+  - `original_language`
+  - `original_title`
+  - `overview`
+  - `popularity`
+  - `production_companies`
+- **Preparation**: You can use a publicly available dataset (e.g., [TMDB 5000 Movies](https://www.kaggle.com/tmdb/tmdb-movie-metadata)) and include it in your forked repository. For faster prototyping, the code loads only a subset (e.g., 300–500 rows).
+
+- tmdb_5000_movies.csv -  CSV file containing movie data
+- main.py - Main Python script with recommendation system code
+- README.md - This README file
+- demo.md - link to a video demo
 
 ## Requirements
+- **Python Version**: 3.6+
+- **Dependencies**:
+  - pandas
+  - numpy
+  - scikit-learn
+  - (Standard libraries: ast, re)
 
-1. **Dataset**  
-   - Use a **small** public dataset of items (e.g., a list of movies with plot summaries, or other textual descriptions).  
-   - Make sure the dataset is easy to handle (maybe 100–500 rows) so the solution remains quick to implement and run.  
-   - Include the dataset in your forked repository *or* provide instructions/link on how to download it.  
+Install the necessary libraries using:
+```bash
+pip install pandas numpy scikit-learn
+```
 
-2. **Approach**  
-   - **Content-Based**: At a minimum, use text similarity to recommend items.  
-     - For instance, you can transform both the user’s text input and each item’s description into TF-IDF vectors and compute **cosine similarity**.  
-   - Return the **top N** similar items (e.g., top 5).
+## How It Works
+**Data Loading & Preprocessing:**
 
-3. **Code Organization**  
-   - You may use a **Jupyter Notebook** or **Python scripts**.  
-   - Keep it **readable** and **modular** (e.g., one section for loading data, one for building vectors, one for computing similarity, etc.).  
-   - Briefly comment or docstring your key functions/sections.
+The system loads a CSV file containing movie data. It preprocesses text fields such as overview, genres, and keywords by cleaning the text (removing punctuation, converting to lowercase) and extracting useful information from list-like fields. It creates a combined text feature from the processed fields.
 
-4. **Output**  
-   - When given an input description (e.g., `"I like action movies set in space"`), your system should print or return a list of recommended items (e.g., 3–5 titles).  
-   - Include the similarity score or rank if you’d like.
+**Feature Extraction:**
 
-5. **Summary & Instructions**  
-   - A short `README.md` that includes:
-     - **Dataset**: Where it’s from, any steps to load it.  
-     - **Setup**: Python version, virtual environment instructions, and how to install dependencies (`pip install -r requirements.txt`).  
-     - **Running**: How to run your code (e.g., `python recommend.py "Some user description"` or open your notebook in Jupyter).  
-     - **Results**: A brief example of your system’s output for a sample query.
+The combined text is vectorized using TF-IDF, creating a numerical representation for each movie.
 
----
+## Similarity Calculation & Recommendations:
 
-## Deliverables
+When a user inputs their movie preference, the system transforms the input into the same TF-IDF vector space. Cosine similarity is computed between the user query and every movie vector. The top 5 movies with the highest similarity scores are returned as recommendations.
 
-1. **Fork the Public Repository**  
-   - **Fork** this repo into your own GitHub account.
+## Running the Code
+- **Prepare the Dataset:** Ensure that tmdb_5000_movies.csv is in the project directory.
+- **Run the Script:** python main.py
+- **Follow the Prompts:** The program will prompt you to enter your movie preference, then display detailed recommendations including the movie title, overview, genres, and similarity score.
 
-2. **Implement Your Solution**  
-   - Load and preprocess your dataset (e.g., read CSV, handle text columns).  
-   - Convert text data to vectors (e.g., TF-IDF).  
-   - Implement a function to compute similarity between the user’s query and each item’s description.  
-   - Return the top matches.
-   - Salary expectation per month (Mandatory)
+## Example Usage
 
-3. **Short Video Demo**  
-   - In a `.md` file (e.g., `demo.md`) within your fork, paste a link to a **brief screen recording** (video link).  
-   - Demonstrate:
-     - How you run the recommendation code.  
-     - A sample query and the results.
+**=== MOVIE RECOMMENDATION SYSTEM ===**
 
-4. **Deadline**  
-   - Submit your fork by **Sunday, Feb 23th 11:59 pm PST**.
+Describe the kind of movie you're looking for!
+Examples:
+- "I love action movies with lots of explosions and car chases"
+- "Looking for romantic comedies set in New York"
+- "Sci-fi movies about time travel"
+- "Dark psychological thrillers with plot twists"
 
-> **Note**: This should be doable within ~3 hours. Keep it **straightforward**—you do **not** need advanced neural networks or complex pipelines. A simple TF-IDF + cosine similarity approach is sufficient.
+Your movie preference: I love thrilling action movies set in space, with a comedic twist
 
----
+**=== DETAILED MOVIE RECOMMENDATIONS ===**
 
-## Evaluation Criteria
+Based on your preference: 'I love thrilling action movies set in space, with a comedic twist'
 
-1. **Functionality**  
-   - Does your code run without errors?  
-   - When given an input query, does it successfully output relevant items?
+1. GUARDIANS OF THE GALAXY
+   Similarity Score: 0.245
+   Overview: A group of intergalactic criminals are forced to work together to stop a fanatical warrior...
+   Genres: [{"id": 28, "name": "Action"}, {"id": 878, "name": "Science Fiction"}]
+...
 
-2. **Code Quality**  
-   - Clear, commented code (where it counts).  
-   - Logical steps (load data → transform → recommend).
+## Salary Expectation
+20-40$/hour 
 
-3. **Clarity**  
-   - Is your `README.md` straightforward about setup, how to run, and what to expect?
-
-4. **ML/Recommendation Understanding**  
-   - Basic implementation of a content-based recommendation approach (vectorization, similarity measure).
-
-**We look forward to seeing your solution!** Good luck!
